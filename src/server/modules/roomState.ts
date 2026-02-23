@@ -1,4 +1,3 @@
-// @ts-nocheck
 const rooms = new Map();
 
 function randCode() {
@@ -28,4 +27,5 @@ function cleanupRoomIfEmpty(room) {
 }
 
 module.exports = { rooms, createRoomCode, getRoomBySocket, cleanupRoomIfEmpty };
+
 

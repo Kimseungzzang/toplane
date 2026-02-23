@@ -1,4 +1,3 @@
-// @ts-nocheck
 const {
   CHAMPIONS,
   WORLD_WIDTH,
@@ -85,4 +84,5 @@ function createGameSystems(deps) {
 module.exports = {
   createGameSystems,
 };
+
 

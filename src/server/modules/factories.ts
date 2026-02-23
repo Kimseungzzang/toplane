@@ -1,4 +1,3 @@
-// @ts-nocheck
 const { WORLD_WIDTH, MINION_HP, CHAMPIONS } = require("./config");
 
 function createPlayer(id, side) {
@@ -131,4 +130,5 @@ function setChampion(player, championId) {
 }
 
 module.exports = { createPlayer, createTower, createMinion, createRoomState, setChampion };
+
 

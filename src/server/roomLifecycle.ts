@@ -1,4 +1,3 @@
-// @ts-nocheck
 const { WORLD_WIDTH, WAVE_SIZE } = require("./modules/config");
 const { createMinion } = require("./modules/factories");
 
@@ -31,4 +30,5 @@ module.exports = {
   spawnWave,
   maybeEndRoom,
 };
+
 

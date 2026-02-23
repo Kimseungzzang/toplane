@@ -1,4 +1,3 @@
-// @ts-nocheck
 function getPlayerBySide(room, side) {
   return [...room.players.values()].find((p) => p.side === side);
 }
@@ -16,4 +15,5 @@ module.exports = {
   getAlivePlayers,
   getOpponentPlayers,
 };
+
 

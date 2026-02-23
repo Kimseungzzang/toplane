@@ -1,4 +1,3 @@
-// @ts-nocheck
 function pushEffect(room, effect, durationMs = 400) {
   room.effects.push({
     ...effect,
@@ -16,4 +15,5 @@ module.exports = {
   pushEffect,
   pruneExpiredEffects,
 };
+
 

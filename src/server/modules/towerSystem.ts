@@ -1,4 +1,3 @@
-// @ts-nocheck
 function createTowerSystem(deps) {
   const {
     TOWER_RANGE,
@@ -200,4 +199,5 @@ function createTowerSystem(deps) {
 module.exports = {
   createTowerSystem,
 };
+
 

@@ -1,4 +1,3 @@
-// @ts-nocheck
 function createStateEmitter(deps: any) {
   const { WORLD_WIDTH, CHAMPIONS, SHOP_ITEMS, canViewerSeePlayer, roomReadyToStart } = deps;
 
@@ -95,4 +94,5 @@ function createStateEmitter(deps: any) {
 module.exports = {
   createStateEmitter,
 };
+
 

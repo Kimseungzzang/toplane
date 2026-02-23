@@ -1,4 +1,3 @@
-// @ts-nocheck
 const express = require("express");
 const http = require("http");
 const next = require("next");
@@ -29,4 +28,5 @@ start().catch((error) => {
   console.error(error);
   process.exit(1);
 });
+
 

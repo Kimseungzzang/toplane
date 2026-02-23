@@ -1,4 +1,3 @@
-// @ts-nocheck
 const TICK_RATE = 20;
 const TICK_MS = Math.floor(1000 / TICK_RATE);
 const WORLD_WIDTH = 2000;
@@ -104,4 +103,5 @@ module.exports = {
   CHAMPIONS,
   SHOP_ITEMS,
 };
+
 

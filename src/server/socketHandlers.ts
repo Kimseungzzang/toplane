@@ -1,4 +1,3 @@
-// @ts-nocheck
 function registerSocketHandlers(io: any, deps: any) {
   const {
     rooms,
@@ -110,4 +109,5 @@ function registerSocketHandlers(io: any, deps: any) {
 module.exports = {
   registerSocketHandlers,
 };
+
 
