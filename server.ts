@@ -1,3 +1,4 @@
+// @ts-nocheck
 const express = require("express");
 const http = require("http");
 const next = require("next");
@@ -18,7 +19,7 @@ async function start() {
 
   attachGame(io);
 
-  app.all("*", (req, res) => handle(req, res));
+  app.use((req, res) => handle(req, res));
   httpServer.listen(PORT, () => {
     console.log(`Toplane Duel (Next.js) running on http://localhost:${PORT}`);
   });
@@ -28,3 +29,4 @@ start().catch((error) => {
   console.error(error);
   process.exit(1);
 });
+

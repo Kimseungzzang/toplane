@@ -1,18 +1,19 @@
-function createStateEmitter(deps) {
+// @ts-nocheck
+function createStateEmitter(deps: any) {
   const { WORLD_WIDTH, CHAMPIONS, SHOP_ITEMS, canViewerSeePlayer, roomReadyToStart } = deps;
 
-  function serializeRoomForViewer(room, viewer) {
+  function serializeRoomForViewer(room: any, viewer: any) {
     return {
       code: room.code,
       started: room.started,
       ended: room.ended,
       winner: room.winner,
       worldWidth: WORLD_WIDTH,
-      champions: Object.values(CHAMPIONS).map((c) => ({ id: c.id, name: c.name })),
-      shopItems: Object.values(SHOP_ITEMS).map((i) => ({ id: i.id, name: i.name, cost: i.cost, desc: i.desc })),
+      champions: Object.values(CHAMPIONS as any).map((c: any) => ({ id: c.id, name: c.name })),
+      shopItems: Object.values(SHOP_ITEMS as any).map((i: any) => ({ id: i.id, name: i.name, cost: i.cost, desc: i.desc })),
       towers: { blue: { ...room.towers.blue }, red: { ...room.towers.red } },
-      minions: room.minions.map((m) => ({ id: m.id, side: m.side, x: m.x, laneOffset: m.laneOffset, hp: m.hp, maxHp: m.maxHp })),
-      effects: room.effects.map((f) => ({
+      minions: room.minions.map((m: any) => ({ id: m.id, side: m.side, x: m.x, laneOffset: m.laneOffset, hp: m.hp, maxHp: m.maxHp })),
+      effects: room.effects.map((f: any) => ({
         id: f.id,
         type: f.type,
         side: f.side,
@@ -26,7 +27,7 @@ function createStateEmitter(deps) {
         color: f.color || "#ffffff",
         expiresAt: f.expiresAt,
       })),
-      players: [...room.players.values()].map((p) => {
+      players: [...room.players.values()].map((p: any) => {
         const hidden = !canViewerSeePlayer(viewer, p);
         if (hidden) {
           return {
@@ -69,13 +70,13 @@ function createStateEmitter(deps) {
     };
   }
 
-  function emitRoomState(io, room) {
+  function emitRoomState(io: any, room: any) {
     for (const viewer of room.players.values()) {
       io.to(viewer.id).emit("state", serializeRoomForViewer(room, viewer));
     }
   }
 
-  function emitMatchStatus(io, room, disconnected = false) {
+  function emitMatchStatus(io: any, room: any, disconnected = false) {
     io.to(room.code).emit("match_status", {
       started: room.started,
       count: room.players.size,
@@ -94,3 +95,4 @@ function createStateEmitter(deps) {
 module.exports = {
   createStateEmitter,
 };
+

@@ -1,3 +1,4 @@
+// @ts-nocheck
 const {
   TICK_RATE,
   TICK_MS,
@@ -76,3 +77,4 @@ function attachGame(io) {
 }
 
 module.exports = { attachGame };
+

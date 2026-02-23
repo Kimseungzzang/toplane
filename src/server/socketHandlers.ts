@@ -1,4 +1,5 @@
-function registerSocketHandlers(io, deps) {
+// @ts-nocheck
+function registerSocketHandlers(io: any, deps: any) {
   const {
     rooms,
     createRoomCode,
@@ -13,8 +14,8 @@ function registerSocketHandlers(io, deps) {
     cleanupRoomIfEmpty,
   } = deps;
 
-  io.on("connection", (socket) => {
-    socket.on("create_room", (ack = () => {}) => {
+  io.on("connection", (socket: any) => {
+    socket.on("create_room", (ack: any = () => {}) => {
       if (getRoomBySocket(socket)) return ack({ ok: false, reason: "already-in-room" });
       const room = createRoomState(createRoomCode());
       const p = createPlayer(socket.id, "blue");
@@ -26,7 +27,7 @@ function registerSocketHandlers(io, deps) {
       emitRoomState(io, room);
     });
 
-    socket.on("join_room", (payload = {}, ack = () => {}) => {
+    socket.on("join_room", (payload: any = {}, ack: any = () => {}) => {
       const code = String(payload.code || "").trim().toUpperCase();
       const room = rooms.get(code);
       if (!room) return ack({ ok: false, reason: "room-not-found" });
@@ -43,7 +44,7 @@ function registerSocketHandlers(io, deps) {
       emitRoomState(io, room);
     });
 
-    socket.on("select_champion", (payload = {}, ack = () => {}) => {
+    socket.on("select_champion", (payload: any = {}, ack: any = () => {}) => {
       const room = getRoomBySocket(socket);
       if (!room || room.ended) return ack({ ok: false, reason: "room-not-found" });
       if (room.started) return ack({ ok: false, reason: "match-started" });
@@ -56,7 +57,7 @@ function registerSocketHandlers(io, deps) {
       emitRoomState(io, room);
     });
 
-    socket.on("purchase_item", (payload = {}, ack = () => {}) => {
+    socket.on("purchase_item", (payload: any = {}, ack: any = () => {}) => {
       const room = getRoomBySocket(socket);
       if (!room || room.ended) return ack({ ok: false, reason: "room-not-found" });
       const p = room.players.get(socket.id);
@@ -71,7 +72,7 @@ function registerSocketHandlers(io, deps) {
       emitRoomState(io, room);
     });
 
-    socket.on("input", (payload = {}) => {
+    socket.on("input", (payload: any = {}) => {
       const room = getRoomBySocket(socket);
       if (!room || room.ended || !room.started) return;
       const p = room.players.get(socket.id);
@@ -91,7 +92,7 @@ function registerSocketHandlers(io, deps) {
       }
     });
 
-    socket.on("ping_check", (clientTs, ack = () => {}) => ack({ serverTs: Date.now(), clientTs }));
+    socket.on("ping_check", (clientTs: any, ack: any = () => {}) => ack({ serverTs: Date.now(), clientTs }));
 
     socket.on("disconnect", () => {
       const room = getRoomBySocket(socket);
@@ -109,3 +110,4 @@ function registerSocketHandlers(io, deps) {
 module.exports = {
   registerSocketHandlers,
 };
+

@@ -1,3 +1,4 @@
+// @ts-nocheck
 function createGameLoop(deps) {
   const {
     rooms,
@@ -36,3 +37,4 @@ function createGameLoop(deps) {
 module.exports = {
   createGameLoop,
 };
+

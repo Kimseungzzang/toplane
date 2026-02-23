@@ -1,3 +1,4 @@
+// @ts-nocheck
 function createTowerSystem(deps) {
   const {
     TOWER_RANGE,
@@ -105,7 +106,7 @@ function createTowerSystem(deps) {
   }
 
   function updateTowers(room, dtSec) {
-    for (const tower of Object.values(room.towers)) {
+    for (const tower of Object.values(room.towers || {}) as any[]) {
       const now = Date.now();
       maybeResetTowerStacks(tower);
       tower.cooldown = Math.max(0, tower.cooldown - dtSec);
@@ -199,3 +200,4 @@ function createTowerSystem(deps) {
 module.exports = {
   createTowerSystem,
 };
+

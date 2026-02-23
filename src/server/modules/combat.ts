@@ -1,3 +1,4 @@
+// @ts-nocheck
 function createCombatSystem(deps) {
   const {
     CHAMPIONS,
@@ -349,3 +350,4 @@ function createCombatSystem(deps) {
 module.exports = {
   createCombatSystem,
 };
+

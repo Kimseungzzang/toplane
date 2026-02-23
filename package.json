@@ -2,11 +2,11 @@
   "name": "toplane-duel",
   "version": "1.0.0",
   "description": "Simple 1v1 top-lane duel with invite-code multiplayer",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
-    "dev": "set NODE_ENV=development&& node server.js",
+    "dev": "cross-env NODE_ENV=development tsx server.ts",
     "build": "next build",
-    "start": "set NODE_ENV=production&& node server.js"
+    "start": "cross-env NODE_ENV=production tsx server.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +18,14 @@
     "react-dom": "^19.2.4",
     "socket.io": "^4.8.3",
     "socket.io-client": "^4.8.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.3.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "cross-env": "^10.1.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }

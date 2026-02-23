@@ -1,3 +1,4 @@
+// @ts-nocheck
 const { BUSH_ZONES } = require("./config");
 
 function isInBushX(x) {
@@ -20,3 +21,4 @@ function canViewerSeePlayer(viewer, target) {
 }
 
 module.exports = { isInBushX, revealIfInBush, canViewerSeePlayer };
+
