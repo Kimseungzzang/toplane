@@ -1,5 +1,21 @@
 import { BUSH_ZONES } from "./constants";
 
+const spriteCache = new Map();
+const SPRITE_BY_CHAMPION = {
+  vanguard: "/assets/champions/vanguard.svg",
+  executioner: "/assets/champions/executioner.svg",
+};
+
+function getSprite(src) {
+  if (!src || typeof Image === "undefined") return null;
+  const cached = spriteCache.get(src);
+  if (cached) return cached;
+  const img = new Image();
+  img.src = src;
+  spriteCache.set(src, img);
+  return img;
+}
+
 function projectX(x, worldWidth, canvasWidth) {
   return (x / worldWidth) * canvasWidth;
 }
@@ -28,10 +44,27 @@ function drawTower(ctx, t, color, worldWidth, canvasWidth) {
 function drawPlayer(ctx, p, myId, worldWidth, canvasWidth) {
   const x = projectX(p.x, worldWidth, canvasWidth);
   const y = 280;
-  ctx.fillStyle = p.side === "blue" ? "#4aa3ff" : "#ff6b6b";
+  const sprite = getSprite(SPRITE_BY_CHAMPION[p.championId]);
+  const spriteSize = 56;
+  if (sprite && sprite.complete) {
+    ctx.drawImage(sprite, x - spriteSize / 2, y - spriteSize + 8, spriteSize, spriteSize);
+  } else {
+    ctx.fillStyle = p.side === "blue" ? "#4aa3ff" : "#ff6b6b";
+    ctx.beginPath();
+    ctx.arc(x, y, 20, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.fillStyle = "rgba(0,0,0,0.45)";
   ctx.beginPath();
-  ctx.arc(x, y, 20, 0, Math.PI * 2);
+  ctx.ellipse(x, y + 20, 17, 5, 0, 0, Math.PI * 2);
   ctx.fill();
+
+  ctx.fillStyle = "#eef6ff";
+  ctx.font = "bold 11px sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText(p.championName || "", x, y - 30);
+
   if (p.id === myId) {
     ctx.strokeStyle = "#fff";
     ctx.lineWidth = 2;
@@ -40,6 +73,7 @@ function drawPlayer(ctx, p, myId, worldWidth, canvasWidth) {
     ctx.stroke();
   }
   drawHpBar(ctx, x, 245, p.hp, p.maxHp, p.side === "blue" ? "#6ec0ff" : "#ff8d8d");
+  ctx.textAlign = "start";
 }
 
 function drawMinion(ctx, m, worldWidth, canvasWidth) {
